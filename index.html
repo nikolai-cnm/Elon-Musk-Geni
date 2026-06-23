@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hypergrowth-protokollen — Sådan vokser du en virksomhed hurtigst muligt</title>
+<style>
+  :root{
+    --bg:#f5f1e8; --paper:#fffdf8; --ink:#1c1a17; --muted:#6b6457;
+    --line:#e2dccd; --accent:#b4451f; --accent2:#1f5d6b; --gold:#9a7a2e;
+    --hist:#1f5d6b; --exmp:#9a7a2e; --takt:#b4451f;
+    --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif; line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:940px; margin:0 auto; padding:38px 22px 120px}
+  header.hero{margin-bottom:24px}
+  .kicker{font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif; text-transform:uppercase;
+    letter-spacing:.18em; font-size:11px; color:var(--accent); font-weight:700; margin:0 0 10px}
+  h1{font-size:clamp(28px,5vw,46px); line-height:1.07; margin:0 0 14px; letter-spacing:-.01em}
+  .lede{font-size:18px; color:#3a352c; max-width:64ch; margin:0 0 10px}
+  .lede.small{font-size:15.5px; color:#4a443a}
+  .toolbar{position:sticky; top:0; z-index:20; background:rgba(245,241,232,.93);
+    backdrop-filter:saturate(180%) blur(8px); border-bottom:1px solid var(--line);
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap; padding:11px 0; margin:18px 0 6px}
+  .btn{font-family:ui-sans-serif,-apple-system,sans-serif; font-size:13px; border:1px solid var(--line);
+    background:var(--paper); color:var(--ink); border-radius:999px; padding:7px 15px; cursor:pointer; font-weight:600; transition:.15s}
+  .btn:hover{border-color:var(--accent); color:var(--accent)}
+  .btn.solid{background:var(--accent); color:#fff; border-color:var(--accent)}
+  .hint{font-family:ui-sans-serif,sans-serif; font-size:12px; color:var(--muted); margin-left:auto}
+
+  ol.principles{list-style:none; margin:0; padding:0}
+  li.principle{background:var(--paper); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);
+    margin:15px 0; overflow:hidden}
+  .phead{display:flex; gap:15px; align-items:flex-start; padding:19px 22px; cursor:pointer}
+  .phead:hover{background:#fffef9}
+  .pnum{flex:none; width:40px; height:40px; border-radius:11px; background:var(--accent); color:#fff;
+    font-family:ui-sans-serif,sans-serif; font-weight:800; font-size:18px; display:flex; align-items:center; justify-content:center; margin-top:2px}
+  li.principle.t2 .pnum{background:var(--accent2)}
+  li.principle.t3 .pnum{background:var(--gold)}
+  .ptitles{flex:1; min-width:0}
+  .ptitle{font-size:21px; font-weight:700; line-height:1.18; letter-spacing:-.01em}
+  .pessence{font-size:15px; color:var(--muted); margin-top:5px; font-style:italic}
+  .caret{flex:none; width:27px; height:27px; border-radius:50%; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; margin-top:7px; transition:.2s; color:var(--muted)}
+  .caret svg{width:13px; height:13px}
+  li.principle.open > .phead .caret{transform:rotate(90deg); border-color:var(--accent); color:var(--accent)}
+  .pbody{display:none; padding:0 22px 20px 22px}
+  li.principle.open > .pbody{display:block}
+
+  .section-label{font-family:ui-sans-serif,-apple-system,sans-serif; text-transform:uppercase; letter-spacing:.12em;
+    font-size:11px; font-weight:700; color:var(--accent); margin:10px 0 8px}
+  li.principle.t2 .section-label{color:var(--accent2)}
+  li.principle.t3 .section-label{color:var(--gold)}
+  .forklaring{font-size:16.5px; color:#2f2a22; margin:0 0 6px; padding:14px 16px; background:#faf6ec;
+    border:1px solid var(--line); border-radius:10px}
+  .forklaring b{font-weight:700}
+
+  /* Steps (kun Algoritmen) */
+  ul.steps{list-style:none; margin:8px 0 0; padding:0}
+  li.step{border:1px solid var(--line); border-radius:11px; margin:9px 0; background:#fffdf7; overflow:hidden}
+  .shead{display:flex; gap:11px; align-items:flex-start; padding:13px 15px; cursor:pointer}
+  .shead:hover{background:#fffef9}
+  .stitle{flex:1; font-size:17px; font-weight:700}
+  .scaret{flex:none; width:22px; height:22px; color:var(--muted); display:flex; align-items:center; justify-content:center; margin-top:2px; transition:.18s}
+  .scaret svg{width:12px; height:12px}
+  li.step.open > .shead .scaret{transform:rotate(90deg); color:var(--accent)}
+  .sbody{display:none; padding:0 15px 13px 15px}
+  li.step.open > .sbody{display:block}
+  .sforklaring{font-size:15.5px; color:#3a352c; margin:2px 0 8px}
+
+  /* Items: Historie / Eksempel / Taktik */
+  ul.items{list-style:none; margin:4px 0 0; padding:0}
+  li.item{border-top:1px solid var(--line)}
+  li.item:first-child{border-top:none}
+  .irow{display:flex; gap:10px; align-items:flex-start; padding:11px 4px; cursor:pointer}
+  .irow:hover{background:#faf7ef}
+  .icaret{flex:none; width:18px; height:18px; color:#b3a888; display:flex; align-items:center; justify-content:center; margin-top:4px; transition:.18s}
+  .icaret svg{width:11px; height:11px}
+  li.item.open > .irow .icaret{transform:rotate(90deg); color:var(--accent)}
+  .itext{flex:1; min-width:0; line-height:1.5}
+  .ktag{font-family:ui-sans-serif,-apple-system,sans-serif; font-size:10.5px; font-weight:700; letter-spacing:.05em;
+    text-transform:uppercase; padding:2px 8px; border-radius:999px; white-space:nowrap; vertical-align:1px; margin-right:7px}
+  .ktag.hist{background:#dcebef; color:var(--hist)}
+  .ktag.exmp{background:#eee4cd; color:var(--exmp)}
+  .ktag.takt{background:#f4e3da; color:var(--takt)}
+  .ilabel{font-size:16px; font-weight:600}
+  .ibody{display:none; padding:0 0 13px 28px}
+  li.item.open > .ibody{display:block}
+  .ibody p{margin:4px 0 0; font-size:15.5px; color:#33302a; line-height:1.62}
+
+  footer{margin-top:40px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted);
+    font-family:ui-sans-serif,sans-serif; font-size:12.5px}
+  footer p{max-width:74ch}
+
+  @media print{
+    .toolbar{display:none}
+    body{background:#fff}
+    li.principle{box-shadow:none; break-inside:avoid; border-color:#ccc}
+    .pbody,.sbody,.ibody{display:block !important}
+    .caret,.scaret,.icaret{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <p class="kicker">Vækst-protokol · kildebaseret destillat · udvidet</p>
+    <h1>Sådan vokser du en virksomhed hurtigst muligt</h1>
+    <p class="lede">En prioriteret guide til de vigtigste idéer om <b>hastighed på vækst</b> — vigtigste idé øverst. Klik et princip for at folde det ud, og fold derefter hver <b>Historie</b>, <b>Eksempel</b> og <b>Taktik</b> ud, lag på lag, for at få mere tekst og dybde.</p>
+    <p class="lede small">Alt indhold er <b>fundet i materialet</b> — fortællinger, eksempler og konkrete handlinger med kildecitater, ikke noget ræsonneret frem.</p>
+  </header>
+
+  <div class="toolbar">
+    <button class="btn solid" id="expandAll">Fold alt ud</button>
+    <button class="btn" id="collapseAll">Fold alt sammen</button>
+    <button class="btn" onclick="window.print()">Print / gem som PDF</button>
+    <span class="hint">Klik et princip · fold Historie / Eksempel / Taktik ud</span>
+  </div>
+
+  <ol class="principles" id="root"></ol>
+
+  <footer>
+    <p>Rækkefølgen følger ét kriterium: <b>hvor meget idéen øger tempoet på at vokse en virksomhed</b>. Hvert princip folder ud i en forklaring og en række ekspansioner — <b>Historie</b> (en faktisk hændelse fra kilderne), <b>Eksempel</b> (en konkret case) og <b>Taktik</b> (en konkret handling, med kort engelsk citat som belæg). Algoritmen er yderligere delt i sine fem trin, der hver folder ud på samme måde.</p>
+    <p>Browseren husker hvad du har foldet ud. Der findes også en kortere udgave: “Hypergrowth-protokollen — kort version”.</p>
+  </footer>
+</div>
+
+<script>
+const CARET = '<svg viewBox="0 0 16 16" fill="none"><path d="M5 3l6 5-6 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const DATA = [
+ {
+  "t": "Algoritmen: Spørg → Slet → Forenkl → Accelerér → Automatisér (til sidst)",
+  "essence": "Den centrale vækstmetode — den eneste idé der optræder i alle fire kilder. Følg de fem trin i præcis rækkefølge.",
+  "forklaring": "Elon Musk bruger denne fem-trins-operationel metode til at accelerere hvert aspekt af virksomheden — fra produktdesign til fabriksdrift til e-handel. Orden er kritisk: hvis du starter med at automatisere eller accelerere før du har slettet og stillet spørgsmål, ender du med at gøre det forkerte ting meget hurtigt. Det samme princip virker på alle virksomheder — fra restaurantkøkkener til softwarestartups. Ifølge Jon McNeill var dette den <b>eneste ide</b> der drog sig gennem hele hans arbejde med Tesla og som senere blev gentaget i alle hans andre venturinger.",
+  "steps": [
+   {
+    "t": "Trin 1 — Spørg til kravene (gør dem mindre dumme)",
+    "forklaring": "Hver regel, krav og konvention blev skabt for en grund — men den grund er ofte forældet, forkert eller baseret på en misforståelse. Spørg ikke blot »hvordan«, men spørg »hvorfor«. Og når nogen siger »det var jo sådan vi altid gjorde det«, er det tiden til at grave dybere. De fleste store gevinster kommer fra at stille det fundamentale spørgsmål: er dette krav overhovedet nødvendigt?",
+    "items": [
+     {
+      "k": "Historie",
+      "t": "Fiberglasmåtterne på battericellepakken — »hvad handler det her om?«",
+      "text": "Elon levede på battericelleproduktionslinjens gulv, fordi det blev en flaskehals for hele bilproduktionen. Hans team havde først gjort fejlen at prøve at automatisere, så at accelerere, så at optimere limen og tørretiden. Måneder gik. Til sidst spurgte Elon batterierne sikkerhedsteam: »Hvad fanden er disse måtter til? Ildbeskyttelse?« De svarede »nej, de er for støj og vibration«. Så Elon spurgte støj-vibrations-holdet det samme — de sagde »ildsikkerhed«. Som at være i en Dilbert-tegneserie. De testede en bil med og uden matterene og en mikrofon i begge. Ingen kunne høre forskel. De slettede delene — hvilket også slettede et trin der krævede to millioner dollars robotik. Hele tiden spildt."
+     },
+     {
+      "k": "Historie",
+      "t": "Tesla China: 100 procent ejerforhold mod alle odds",
+      "text": "I 2015 sendte Elon Jon McNeill til Beijing med instruktioner om at forhandle en 100 procent Tesla-ejet fabrik i Kina. Problemet: Kina krævede ejerandel i alle udenlandske fabrikker. GM, Microsoft, Airbus og Volkswagen havde alle joint ventures. Det syntes umuligt. Men Elon så kravene ikke som permanente — han så dem som en vejledning til at stille spørgsmål. »Regler og regulativer kan ændres eller, i nogle tilfælde, trodses. Hver regel, som Elon så det, begrænser muligheder,« skriver McNeill. Han forhandlede og forhandlede. Det lykkedes — det første udenlandsk-ejede bilværk i Kina blev virkelighed."
+     },
+     {
+      "k": "Eksempel",
+      "t": "Lånedokumenter reduceret til ét klik",
+      "text": "Tesla's e-handelskøb krævede 64 klik. Da Elon ville reducere det til 10, opdagede McNeills team, at det vigtigste bottleneck var finansiering: dusin af juridiske dokumenter og underskrifter. De spurgte: »hvorfor skal en lånaftale fylde 50 sider når essensen er: »Køber garanterer at betale beløb hver måned til bilen er betalt«? Analyse viste at 90 procent af indholdet var standardtekst skrevet af bankjurister, ikke regulatorer. Med U.S. Bank og Ally Bank skabte de en en-paragraf lånansøgning. Resultatet: 12 klik for at købe og finansiere en Tesla."
+     },
+     {
+      "k": "Taktik",
+      "t": "Navngiv hver person bag kravet — aldrig en department",
+      "text": "Elon instruerede sit team: »Du må ikke spørge en department om noget. Du skal kunne spørge en <b>person</b>, og den person der fremfører kravet skal tage ansvar for det.« Ellers finder du ud af at kravet blev gjort af en praktikant for to år siden eller af nogen der slet ikke arbejder hos jer længere. Da McNeill gravede ned i Tesla's gamle krav, fandt holdet ofte at ingen på det givne sted var enig i kravet. Processen blev med det samme 10 gange hurtigere blot ved at kende navnet."
+     },
+     {
+      "k": "Taktik",
+      "t": "Spørg selv til de dummeste krav — især dem fra clevere mennesker",
+      "text": "Elon sagde: »Dine krav er helt sikkert dumme. Det betyder ikke noget hvem der gav dem til dig. Krav fra intelligente mennesker er de farligste, fordi du er mindre tilbøjelig til at stille spørgsmål til dem. Spørg altid til krav, selv hvis det kom fra mig. Alle tager fejl nogle gange.« Den tankemængde ændrer alt: den begyldige faktor er ikke længere at acceptere ord fra autoritet, men at få det til at give mening."
+     }
+    ]
+   },
+   {
+    "t": "Trin 2 — Slet delen eller processen",
+    "forklaring": "Mennesker har en bred bias mod at tilføje »bare i tilfælde«. Men hvis du ikke gør fejlen mindet 10 procent af tiden ved at slette for meget, sletter du ikke nok. Sletning er ikke et misstrin — det er det mest vigtige trin. Hver gang du tilføjer noget skal det kæmpe for sin ret til at eksistere.",
+    "items": [
+     {
+      "k": "Historie",
+      "t": "Deletion Rampage på SpaceX — »intet er helligt«",
+      "text": "Elon sendte en email til SpaceX-teamet med besked: »Vi er på en deletion rampage!! Intet er helligt. Vi vil slette enhver tværtimod tvivlsom tube, sensor, manifold, osv. i aften. Vær venlig at gå ultrahardcore på deletion og simplificering.« Årsagen: hver ton ekstra vægt på Starship betyder næsten to ton når man tilregnede al den yderligere brændstof der skal transporteres det hele væk. Recursion factor omkring 1,8. Så deletion af vægt var ikke en finesse — det var overlevelsesspørgsmål for rumfarten."
+     },
+     {
+      "k": "Historie",
+      "t": "Tesla's 64-til-12-klik e-handelsmakeover",
+      "text": "McNeills team opdagede at e-handelswebsitet krævede 64 klik for at købe en Tesla. Med hver klik faldt sandsynligheden for at kunden fuldt igennem. De reducerede først fra 64 til 30 ved at slette alle redundante valgmuligheder — fra over 300.000 mulige kombinationer af farve, polstring og features ned til to kernepakker: praktisk eller performance. Det var som at gøre Tesla til Ferrari — færre valg, mere tiltro til brand. Så gik de fra 30 til 12 ved at slette de juridiske dokumenter helt. Over næste ti måneder steg e-handelssalget 20 gange."
+     },
+     {
+      "k": "Eksempel",
+      "t": "Model 3 »Alien Dreadnought« — når automatisering går for langt",
+      "text": "Elon forestillede sig en fuld automatiseret montage »the Machine that Produces the Machine« for Model 3. Det blev en katastrofe: robotter kørte ind i hinanden, biler faldt af baner, kø og fejl. Løsning: Jerome Guillen byggede et stort telt og satte mennesker til at montere bilerne i stedet. Første uge: 75 biler. Sjette uge: 750. Ved at det først manuelt, lærte de hvilke trin der var unødvendige — og slettede 50 procent af montagetrinene. Derefter kunne de reintroducere maskiner med meget mindre kompleksitet."
+     },
+     {
+      "k": "Taktik",
+      "t": "»Hvis du ikke tilføjer slettede ting tilbage 10 procent af tiden, sletter du ikke nok«",
+      "text": "Elon bruger denne sætning for at øve folk ind i at overkorrigere deres bias mod »bare i tilfælde«. Folk husker med smertelig dyb mindet når de slettede noget de siden havde brug for — så de tilføjer for meget tilbage. Nøglen er at acceptere at omkring 10 procent af det du sletter skal tilbage. Alt andet var fjosnaftet."
+     },
+     {
+      "k": "Taktik",
+      "t": "Slet efter at have stillet spørgsmål — ikke før",
+      "text": "Rækkefølgen vigtig. Spørg først »er dette krav korrekt?« *derefter* »kan vi slette dette?« Hvis du sletter uden at spørge, kan du slette noget nødvendigt. Men hvis du først øger forståelsen, ser du hvad der virkelig er værd at holde på."
+     }
+    ]
+   },
+   {
+    "t": "Trin 3 — Forenkl og optimér",
+    "forklaring": "»Det mest almindelige fejl hos intelligente ingeniører er at optimere noget der slet ikke burde eksistere.« Det er hvad Elon siger. Folk bliver trænet til at besvare spørgsmålet foran dem — de kan ikke engang tænke at spørgsmålet i sig selv er forkert. Så først efter du har slettet alt det unødvendige, *så* kan du optimere hvad der tilbage. Ikke før.",
+    "items": [
+     {
+      "k": "Historie",
+      "t": "Tesla e-handel: fem kundetyper i stedet for to",
+      "text": "McNeill og Ganesh Srivats analyserede Teslas kundebase og opdagede de ikke havde to kundetyper (performance vs. miljø) — de havde fem: Tech (Autopilot fokus), Safety (særligt kvinder), Performance (0-60 acceleration), Environment (kulstof), og Status (grøn Ferrari-alternativ). Med den indsigt kunne de redesigne websitet til at tale direkte til hver type. Salget steg straks, men ikke nok. Så gik de til næste optimization: reducere valg kompleksitet fra 300.000 kombinationer ned til to packager. Supply chain simplificeredes, marginerne skød op 20 procent. Først spørgsmål (hvem er vores kunder), så deletion (fjern unødvendige valgmuligheder), så optimization (organiser det der er tilbage)."
+     },
+     {
+      "k": "Historie",
+      "t": "Lululemon: farveudvikling fra 18 måneder til 4 timer",
+      "text": "Når Lululemon skulle kle det canadiske olympiateam inden for fire måneder i stedet for deres normale 18 måneder, blev farveudviklingen en kritisk bottleneck. Normalt sendt hvidt stof til Asien til farvning, mange forsøg, prøver sent tilbage til designer, valg, shipment til fabrik. Siden: supply-chain-leder og designer fløj til Asien sammen og sidder side ved side under farveprocessen. Alle tilbage-og-forths der plejede at tage uger eller måneder blev håndteret på minutter. Optimering af processen kom fra at være der sammen — ikke fra at »accelerere« det gamle system."
+     },
+     {
+      "k": "Eksempel",
+      "t": "Parkeringslot-synlighed: » Parking Lot Hell« bliver data",
+      "text": "I 2015 lå tusindvis af Model X biler på Fremonts parkeringslot efter linje, der ventede på finalkontrol eller reparation. Problemet: usynlighed. Staff skulle gå gennem loden, række efter række, og mærke hver bil manuelt for status og bestemmelsessted. McNeill spurgte »hvorfor kan vi ikke se hvor bilerne er?« Det førte til at digitalisere og visualisere bilernes status — hver bil fik en digital »ID« som kunne ses i realtid. Inventory blev pludselig »cash« — arbejdskraft blev frigivet, skibstider blev reduceret."
+     },
+     {
+      "k": "Taktik",
+      "t": "Spørg: »Hvad betaler kunden for denne trin?« Hvis ikke, fjern den",
+      "text": "McNeill fortalte sine ledere at tegne hver trin i en proces, og derefter cirkel de trin hvor kunden *ikke* betaler for arbejdet — som dobbelttjek af bogføring eller performance reviews. Disse er kandidater til sletning. Derefter kan man spare tiden på de trin der tilbage *faktisk* skaber værdi."
+     },
+     {
+      "k": "Taktik",
+      "t": "Forenkl før du accelererer",
+      "text": "»Den største fejl jeg gjorde på Tesla-fabrikker var at prøve at automatisere hver trin for tidligt,« siger Elon. »Vi måtte rive hundreder af dyre robotter ud. Vi satte et hul i siden af bygningen bare for at få det hele ud.« Læring: først forenkl processen (slet og organiser), derefter kan du accelerere, derefter kan du automatisere. Ikke omvendt."
+     }
+    ]
+   },
+   {
+    "t": "Trin 4 — Accelerér cyklustiden",
+    "forklaring": "Først efter at du har stillet spørgsmål, slettet, og forenklet — *derefter* kan du løbe hurtigere. »Hvis du graver din grav, grav den ikke hurtigere. Stop med at grave,« som Elon siger det. Accelerering uden først at have gjort det rigtige arbejde betyder blot at du gør fejlene på høj hastighed.",
+    "items": [
+     {
+      "k": "Historie",
+      "t": "Lululemon Olympiade-tøj: 18 måneder ned til 4 måneder",
+      "text": "Lululemon skulle udstyring det canadiske olympiateam til Beijing 2022 inden for fire måneder i stedet for de normale 18. Det krævede total reinvention af processen. Normalt gik design til logistik til produktion i en lineær relay-race. For at reducere cyklustiden med mere end en faktor fire måtte næsten alle trin køre samtidigt (som i et restaurantkøkken hvor folk griller bløkoder samtidig med at forberede sauce). Lululemon samlede ledere fra hver trin i samme rum — det havde aldrig været gjort før. Disse mennesker arbejdede normalt i sine egne siloer. Men at sidde sammen gjorde blinksnellesbeslutninger mulig. Resultatet: tøjet var klar, New York Times kaldte det »en sejr for et brand der aldrig havde lavet Olympic kit før«, og videoen blev viral på TikTok."
+     },
+     {
+      "k": "Historie",
+      "t": "GM Hummer EV: fra 4 år ned til 19 måneder",
+      "text": "Mary Barra udfordrede GM til at bygge en elektrisk Hummer — »den mest kraftslukkende« bil — og have den i produktion i halvdelen af de normale 4 år det tog at lancere en ny bil. Hun satte Josh Tavel på opgaven, ga' ham fuldstændig frihed til at bygge sit eget team uden GM's normale hierarki og godkendelser. Tavel og teamet spurgte alt »hvorfor?«, slettede unødvendige trin, simplificerede. De tilføjede innovative features (CrabWalk — diagonalstørning, power-sharing, underbelly-kameraer) uden at miste hastighed. Første Hummer EV kom af linjen December 3, 2020 — 19 måneder efter start. Siden da er GM's normale udviklings-cyklus gået fra 2-4 år ned til 12-14 måneder."
+     },
+     {
+      "k": "Eksempel",
+      "t": "Hurricane Irma: temporary battery range upgrade på timer",
+      "text": "September 2017: Hurricane Irma truet Florida. Tesla-ejere evakuerede, men batterierne døde i stodsfyldt trafik. Karim Bousta, chef for global service, spurgte »kan vi give dem midlertidig ekstra range?« Holdet testede nej, da de normale processer ville tage uger. Men Karim accepterede risikoen (ingen kan få skadet, ingen lovbrud, ingen millioner-krises). Han slettede de fleste normale trin. Engineers skabte opdateringen på timer. Klokken 22 modtog 2000 Florida-kunder 75 miles ekstra range *gratis* — for en uge. Presseomtale var glimrende. Lektionen: når du først har slettet og forenklet, kan acceleration redde mennesker og dine brand."
+     },
+     {
+      "k": "Taktik",
+      "t": "Sæt aggressivt måltal og accepter at processen vil briste",
+      "text": "McNeill: »Som leder kan du tage enhver proces, øge farten, og derefter se hvor den knakker. Det viser dig hvor du skal fokusere.« En proces kan kun gå så hurtigt som sitt langsomste trin. Arbejd på det trin, og hele systemet accelereres. Ofte skal du innovere vanvittigt for at få det trin til at gå hurtigere."
+     },
+     {
+      "k": "Taktik",
+      "t": "Kør trin parallelt, ikke sekventielt — ligesom i et køkken",
+      "text": "Traditionalel var Lululemon's operations en stafetløb: design, så logistik, så produktion. At reducere tiden fire gange krævede at køre mange trin samtidigt. Samme med Hummer EV — designers, supply-chain, og produktion arbejdede side ved side. SR-71 Blackbird blev aldrig ramt af over 3000 missiler — det eneste det gjorde var at gå hurtigere. Paralleligelse er den samme taktik i industriel virkelighed."
+     }
+    ]
+   },
+   {
+    "t": "Trin 5 — Automatisér (allersidst)",
+    "forklaring": "Du kan aldrig automatisere hvad du ikke helt forstår. »Automating var en fejl, derefter accelerering var en fejl, derefter optimering var en fejl,« siger Elon om fiberglasmåtterne. Først efter du har gjort arbejdet manuelt, lært hver bevægelse, hver rækkefølge, hver constraint — kun *derefter* automatisere. Eller du ender med at bygge fantastiske robotter der gør det forkerte ting meget hurtigt.",
+    "items": [
+     {
+      "k": "Historie",
+      "t": "Model 3 »tent assembly« : fra 75 til 750 biler om ugen",
+      "text": "Alien Dreadnought-robotterne blev en katastrofe. Elon havde hoppet direkte til fuld automatisering uden først at have lært processen. Jerome Guillen foreslog at bygge et stort telt og montere bilerne helt manuelt først. Først uge: 75 Model 3er. Elon og holdet lærte hver bevægelse, hver trin, hver bottleneck. De fjernede 50 procent af montagetrinene. Sjette uge: 750 biler. Nu kunne de reintroducere robotter — en ad gangen — med fuld forståelse af hvad de skulle gøre. Denne pared-down-proces blev fundament for alle Teslas mega-factories siden — Shanghai til Austin."
+     },
+     {
+      "k": "Historie",
+      "t": "Amazon og DoorDash: manuel arbejde før automation",
+      "text": "Da Amazon startede som online boghandel, kørte drift helt på menneskelig arbejde. Folk løb til boghandleri, solgte dem, pakkede og sendte, og fandt den mest effektive måde at gøre det på. Hvad de lærte, informerede senere automationen Amazon er berømt for. DoorDash gjorde det samme: grundfæstere scannede menuer fra lokale restauranter, satte dem på en hjemmeside med Google Voice-nummer. Da ordrer kom, fyldte de dem manuelt. Efter at have studeret og optimeret processen *derefter* begyndte de at automatisere. Elon bruger disse eksempler til at bevise at selv de smarteste virksomheder ikke springer manuelt arbejde over."
+     },
+     {
+      "k": "Eksempel",
+      "t": "Fiberglasmåtterne: det er nemmere at bygge robotter end at forstå processen",
+      "text": "To millioner dollars robotik blev bygget for at påføre fiberglasmåtter på batteripakker. Elon levede på linjen for at »forstå« problemet. Team forsøgte at »reparere« robotterne, at accelerere dem, at optimere lim-tørring. Måtte gik »hvorfor er disse måtter overhovedet her?« Ingen kunne svar (batteri-teamet sagde ildsikkerhed, vibrations-teamet sagde ildsikkerhed — som en Dilbert cartoon). Test viste at ingen kunne høre forskel på biler med eller uden måtterne. Så de slettede hele trinnet — og dermed hele to millioner dollars robotik. Lektionen: det er nemmer at bygge fejl-robotter end at forstå processen godt nok til at stille det rigtige spørgsmål."
+     },
+     {
+      "k": "Taktik",
+      "t": "Automation amplificerer — det gør ikke fikser",
+      "text": "»Hvis du automatiserer uden først at have forstået hver bevægelse, er det som at knuse på speederen mens du kører i den forkerte retning,« siger Elon. Automation gør det godt dyrere og det dårlige på høj hastighed. Først må du gøre det manuelt, acceptere det er langsomt, og lære dybde ned i hver trin."
+     },
+     {
+      "k": "Taktik",
+      "t": "Vent til slutningen af designprocessen — efter sletning, efter simplifikation",
+      "text": "»Altid vent til slutningen af designprotoces — efter du har spurgt alle krav og slettet unødvendige dele — før du introducerer automation,« siger Elon. Det betyder at næsten alt i et moderne startupværk skal gøres manuelt først. Nem regel: hvis du ikke helt forstår det, kan du ikke automatisere det."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "t": "Angrib altid den begrænsende faktor — Constraint Theory",
+  "essence": "Find den ene begrænsende faktor og angrib den; alt andet er sekundært. Når én er løst, dukker den næste op.",
+  "forklaring": "Hvis du vil vokse eksplosivt, må du først lokalisere præcis hvilket enkelt element der standser hele maskineriet. Ikke alt har samme vægt. De fleste virksomheder spreder deres indsats tyndt over tyve problemer og løser ingen. Elon finder «the single dominating objective» pr. sted — den turbine-vane der mangler, den chipfabrik der begrænser, det eneste casting-selskab i verden. Hans kraft er i fokus, ikke ressourcer.",
+  "items": [
+   {
+    "k": "Historie",
+    "t": "Turbine-vane-flaskehalsen ved xAI",
+    "text": "xAI havde brug for en gigawatt strøm til Colossus-datacenter. Musk drillede ned: turbiner var solgt helt ud til 2030 — det var ikke problemet. Det virkelige problem var vaner og blade i turbinerne. Der er kun tre støberiselskaber i verden, der kan lave dem, og de er massive baglogged. Løsningen var at SpaceX og Tesla må fabrikere disse blade internt. En enkelt specialiseret proces — metalstøbning af præcision-vaner — blev pivotalpunktet for hele energi-roadmap'en."
+   },
+   {
+    "k": "Historie",
+    "t": "«Flash mob» på hallway — SpaceX Redmond-skift",
+    "text": "NASA-chef besøgte SpaceX og lagde mærke til: når et nyt problem opstod, så «udseende på det ligesom en flash mob der dukker op i hallway». Hele holdet mobiliserede på øjeblikket omkring den ene begrænsning. Ikke møder, komitéer eller e-mails — fysisk konvergens omkring «the bottleneck». Kultur og struktur justeres så hele organismen kan pege på én faktor ad gangen."
+   },
+   {
+    "k": "Historie",
+    "t": "Starlink-genstart: to størrelsesordener forkert",
+    "text": "Starlink kostede 10× for meget og producerede 1/10 af hvad der var nødvendigt — to størrelsesordener fra succes. Musk greb Marc Giancosa fra SpaceX (raket-ingeniør, aldrig været på satellit før), en tro team, og de fløj til Seattle. De fyrede hele Starlink-ledelsen og sad i «war room». Kørte algoritmerne direkte på problem-root: hvad er det eneste, der skal til? Over få måneder fik de to størrelsesordener-spring. Værdien: tens of billions — alt fordi de pejlede sig én gang og angreb."
+   },
+   {
+    "k": "Eksempel",
+    "t": "Energi → Chips → Produktion — sekvensen",
+    "text": "Musk ser hierarkiet klart: før du kan køre AI i rummet, skal du have strøm. Før du kan bygge datacentre på jorden, skal du have turbine-blade. Før du kan fabrikere blade, skal du have casting-kapacitet. Han presser ikke på alt samtidig — han løser éngang og vandrer videre. «Hvad holder os tilbage lige nu?» ikke «hvad er vigtigt som koncept?»"
+   },
+   {
+    "k": "Taktik",
+    "t": "Navngiv ansvar for hver begrænsning",
+    "text": "I xAI og SpaceX får én person ejet én faktor. Ikke et udvalg. En ingeniør. Hold dem ansvarlige hver uge: hvor har vi gjort fremskridt? I «the algorithm», hver requirement har et navn ved siden af — «requirement from Jam in Legal» — så du kan spørge Jam: hvorfor? Dette sikrer at fokus ikke blir dårlig. Som Elon siger: «the constraint is chips» eller «the constraint is power» — klart emne, klar ejer."
+   },
+   {
+    "k": "Taktik",
+    "t": "Ugentlige skip-level reviews på kurven",
+    "text": "Plot de vigtigste metrikker hver uge på en graf. Når der er ét «single dominating objective» pr. sted, kan du på 30 sekunder se: går det fremad eller bagud? Musk møder ingeniørerne, ikke administrationen. Hvis droslen løftes én gang, møder han dem mindre — fokus fortæller os om prioritet. Som han siger: «if something's going really well, they don't see much of me» — jeg er hvor flaskehalsen er."
+   },
+   {
+    "k": "Taktik",
+    "t": "Når én er løst, vandrer fokus — ikke hvile",
+    "text": "Når turbine-blade-problemet løses, skifter det øjeblikkelig til næste. Samme med chips, samme med produktion. Organisationen skal være trænet til: {find faktor} → {angrib aggressivt} → {løs} → {næste}. Intet »vi burde festivalere«. Ventetiden mellem ændring af fokus er målt i timer, ikke møder. Som i krigsføring: »front linjer forskydes, ressourcer gendeployes, momentum holdes«."
+   }
+  ]
+ },
+ {
+  "t": "Manisk hastighedssans: tid er den eneste valuta du ikke får igen",
+  "essence": "Dræb møder, komprimér beslutninger, brug penge til at købe tempo. Hastighed er både angreb og forsvar.",
+  "forklaring": "Elon opsiger sin scheduler fordi han vil have »complete perfect control over tid«. En halv times møde med ham koster firmaet 100 millioner dollar i værdiskabelse. Han hyrer en mekaniker på en lørdag kl. 18 — interview, forhandling, kontrakt, starter samme dag. Han brænder 60.000 dollars jet-brændstof for at sende en del til Hawaii for at spare en arbejdsdag. Hastighed er ikke optimering; det er liv-eller-død strategi.",
+  "items": [
+   {
+    "k": "Historie",
+    "t": "Afskydelse af scheduleren",
+    "text": "Musk fyrede sin personlige scheduler fordi han ville have absolut kontrol over sit eget tidsbudget. Ikke fordi scheduleren var dårlig — men fordi en ydre person ikke kan sætte prioriteter som ham selv kan. Hver sekund, der bruges på venterom eller transition, er ståleret fra »gå direkte på problemet«. Samme princip bruges i virksomheden: hvis møder ikke betyder noget konkret, bliver de lettet væk eller omdannet til »arbejds-session« hvor beslutninger træffes i real-time."
+   },
+   {
+    "k": "Historie",
+    "t": "Lørdag kl. 18 — Recruit mekanikeren",
+    "text": "SpaceX havde akut brug for en dygtig mekaniker. Musk finder et navn på lørdag aften. Ring op, interview på telefonen, forhandler salary og benefits mens han kørte hen til fabriken, får han til at skrive under på kontrakten samme aften, og manden starter mandag morgen. Ikke tirsdag. Ikke næste uge efter møder. Mandag. Denne »tidsratio« — hvor hurtigt kan du gå fra »vi mangler« til »personen er operationel« — er et konkurrencemæssigt våben."
+   },
+   {
+    "k": "Historie",
+    "t": "60.000 dollars jet-brændstof for at spare en dag",
+    "text": "En kritisk del skulle til Hawaii til et produkt-test-vindue. At sende den med kommercialt fly = 2-3 dage delay. Musk flyver den selv med privatjet (60k dollars i brændstof), spar 1.5 dagen, del tester, der betyder millioner i værdiskabelse. For de fleste virksomheder lyder det sindssygt. For ham er det simpel matematisk: «en dag på det projekt er værd >60k dollar, så det er en god aftale»."
+   },
+   {
+    "k": "Eksempel",
+    "t": "SR-71 Blackbird — aldrig nedskudt, 3000+ missiler",
+    "text": "Musk citerer SR-71 Blackbird: fartighed var det eneste forsvar. 3000+ missiler affyret, ingen ramte. Ikke fordi den var blind til trusler, men fordi den var hurtigere end konsekvensen. I business: hvis du er hurtigere end konkurrencen kan reagere, kan de ikke ramme dig. Hastighed er asymmetrisk væbning."
+   },
+   {
+    "k": "Taktik",
+    "t": "»Excessive meetings are the blight of big companies«",
+    "text": "Musk siger direkte: møder er forgiftning for store organisationer. Hans regel er »leave the meeting« hvis det ikke producerer ting med øjeblikkelig indvirkning. Byg kultur hvor: (1) møder har dødlinje for afgørelse, (2) én person ejer notater og action-items, (3) hvis der ikke sker noget konkret, mødet aflyses næste gang. Slack/email erstatter »idé-dele« møder. Fysiske møder = beslutninger."
+   },
+   {
+    "k": "Taktik",
+    "t": "»Burn rate maps to revenue: 60k/dag → 10M/dag i 10 år«",
+    "text": "Musk siger: hvis SpaceX kostede 60.000 dollar om dagen at køre i første år, og vi skal have en rocket, der genererer 10 millioner om dagen om 10 år, så betyder hver dag der spares eksponentielt værdier. Et år sparet = 365 × 10 millioner = 3.65 milliarder i hurtigere vejtomarked. Hastighed er ikke luksuriøs; det er økonomi. Brug penge aggressivt til at accelerere, ikke til at spilde."
+   },
+   {
+    "k": "Taktik",
+    "t": "»Vector, not scalar« — retning handler mere end kraft",
+    "text": "En halv times møde kan være »+100 millioner« (rigtigt valg) eller »-100 millioner« (vending i design). Størrelse på mødet betyder mindre end hvad der skabes ud af det. Elon bruger møder sådan: kald de rigtige folk sammen, stil det rigtige spørgsmål, luk mødet med beslutning. Ikke »information sharing« eller »alignment« — beslutning med øjeblikkelig handling. Tempo kommer fra vektoren: er vi ved at bevæge os i den rigtige retning, hurtigere end i går?"
+   }
+  ]
+ },
+ {
+  "t": "Tænk fra første principper (fysik), ikke fra analogi",
+  "essence": "Brug „magic wand”-prisen og idiot-indekset til at se hvor stort spillerummet er. Genberegn fra fysik ved de faktiske driftsforhold.",
+  "forklaring": "Berygt dig ikke på, hvad konkurrenter eller historie siger er umuligt. I stedet sønderdeler du problemet til rå materialekostnader via London Metal Exchange – det sætter gulvprisen. Et „magic wand”-tal af 1–2 procent betyder, at 98 procent af omkostningen er ineffektivitet i fabrikation, ikke materialer. Idiot-indekset – forholdet mellem slutpris og råvareværdi – afslører hvilke dele der er designet eller fremstillet bårligt. Den samme fysik-første tilgang påtvinges hvert design: stål i stedet for kulfiber fordi det bliver stærkere koldt, 4 mm væg i stedet for 4,8 mm fordi veldererne sagde „det ville gøre os nervøse” – men det gjorde det ikke.",
+  "items": [
+   {
+    "k": "Historie",
+    "t": "Batteriomkostninger: fra $600/kWh til $80/kWh",
+    "text": "Tesla-teamet antog, at battericer altid ville koste omkring 600 dollar pr. kilowatt-time. Elon delte batteriet ned til kobolt, nikkel, aluminium, carbon og stål – og kiggede på spotpriser på London Metal Exchange. De samme materialer i bulkkøb kostede kun 80 dollar. Det var beviset på, at prisen kunne falde drastisk ved klognere fabrikation, ikke ved at håbe på mindre dyre materialer."
+   },
+   {
+    "k": "Historie",
+    "t": "Raketomkostninger: 2 % råmaterialer, 98 % overhead",
+    "text": "Elon opdagede, at en komplet raket kunne laves af råmaterialer – aluminium, titan, kobber – for under 5 procent af hvad SpaceX kostede at bygge. Nogle dele var nærmere 1–2 procent. Det betyder, at fabrikanter havde opbygget 98 procent overhead; hver underleverandør tog en margin. Den halvt dyse-jacket til en raket kostede 13.000 dollar, men var kun 200 dollars stål – idiot-indekset på 65:1."
+   },
+   {
+    "k": "Eksempel",
+    "t": "Starship-vægtykkelse: spørg svejserne, ikke cheferne",
+    "text": "Ingeniørerne sagde, at Starship skulle have vægtykkelse på omkring 4,8 millimeter. Elon gik til svejserne på fabrikken – de faktiske arbejdere – og spurgte deres vurdering. De svarede, at 4,8 millimeter var det mindste, de kunne godtage; 4 millimeter ville gøre dem „ret nervøse”. Elon sagde: „Lad os prøve fire millimeter.” Det virkede. Fysik kommer før frygt."
+   },
+   {
+    "k": "Taktik",
+    "t": "Brug magic wand-prisen til at se spillerummet",
+    "text": "Kalkulér hvad råmaterialerne ville koste, hvis de blev arrangeret helt uden spild — som med et tryllestavsslag. Det er „magic wand“-tallet, og det sætter gulvet for, hvad produktet i bedste fald kan koste. Er det færdige produkt fx 100 gange dyrere end materialerne, har du fundet et 100-dobbelt effektiviseringspotentiale. Som Elon formulerer det: “That first-principles thought process around the rocket became general purpose for all parts. I call it the Idiot Index.”"
+   },
+   {
+    "k": "Taktik",
+    "t": "Mål idiot-indekset; det afleder hvor du skal skære",
+    "text": "Del slutprisen på en del med kostprisen af dens råmaterialer. Et forhold på 50:1 eller 100:1 betyder, at designet eller processen er ineffektivt — ikke materialet. Konvertér tallet til handling: kombinér dele, ændr fremstillingsmetoden, eller slet designet helt. Hver ingeniør bør kende de værste og bedste dele i sit systems idiot-indeks til enhver tid. Som Elon siger det skarpt: “If the ratio is high, you’re an idiot.”"
+   },
+   {
+    "k": "Taktik",
+    "t": "Genberegn fra fysik under driftsforhold, ikke under laboratorium",
+    "text": "En raket designet til stuetemperatur opfører sig ikke som én i rummets kulde. Starship er bygget i rustfrit stål frem for kulfiber, blandt andet fordi stålets styrke-til-vægt nærmer sig kulfiberens ved de kryogene temperaturer, som brændstof og oxidator holder — en fysik-egenskab man overser, hvis man bare kopierer industristandarden. Pointen: regn på materialet ved de FAKTISKE driftsforhold, ikke ved laboratorietemperatur. Som Elon formulerer det: “Physics is law; everything else is a recommendation.”"
+   }
+  ]
+ },
+ {
+  "t": "Byg holdet: kun exceptionelt talent, ansat for egenskaber",
+  "essence": "Talent er flaskehalsen. Ansæt for bevis på exceptionel evne og for egenskaber — ikke for CV og domæne.",
+  "forklaring": "Den kloge kandidat kender detaljerne om hård teknisk problemer, fordi de selv løste dem og kæmpede med dem. En person, der bare var tilstede, kan ikke svar på spørgsmål i detaljer. Dårlige egenskaber kan ikke læres; det kræver en hjernetransplantation. Derfor vurderer Elon karakter ved at kigge på deres venner og kollegaer – mennesker kan sætte på maske selv, men deres netværk kan ikke. For Bülent Altan ringede han til Larry Page på Google for at få hans kone overført til LA; at få det rigtige talent ind var vigtigere end at acceptere deres begrænsninger. Unge ingeniører uden dårlige vaner, med bevis for ekstraordinær problemløsning, fylder de bedste hold.",
+  "items": [
+   {
+    "k": "Historie",
+    "t": "Bülent Altan: flyt hele familien for det rigtige talent",
+    "text": "Elon ville ansætte Bülent Altan som raketingenier til SpaceX. Altan sagde nej, fordi hans hustru arbejdede for Google i San Francisco, og han ønskede ikke at flytte til Los Angeles. I stedet for at acceptere „nej”, ringede Elon direkte til Larry Page, Googles medgrundlægger, og forhandlede om at få Altans kone overført til LA. Altan accepterede jobbet. Talent var vigtigere end at respektere grænser; omkostningen ved at flytte en person og deres familie var værd det."
+   },
+   {
+    "k": "Historie",
+    "t": "Søg efter bevis for exceptionalitet i karrierens kamp",
+    "text": "Elon spørger kandidater om deres karriere og de hårdeste problemer, de har løst. En person, der kæmpede rigtig med problemet, husker hver detalje – det gjorde ondt, de løste det trin for trin. Når du stiller følgespørgsmål om hvad, hvordan og hvorfor, kan de forklare sig. En perifer figur, der bare var der, kender ikke detaljerne. Du kan adskille dem ved at spørge konkret: „Hvordan løste du denne del?” Hvis de kender det, var de der. Hvis de tøver, var de ikke."
+   },
+   {
+    "k": "Eksempel",
+    "t": "„Tell me four ways you fucked up” – dårlig iteration betyder du var ikke involveret",
+    "text": "Elon spurgte en ingeniør: „Hvis du ikke kan fortælle mig fire måder, du gjorde noget forkert før du fik det rigtigt, var du ikke den, der gjorde det rigtige arbejde.” En person, der kun havde små sejre, havde ikke itereret hårdt. Den, der itererede til successtået gjorde fejl – mange fejl – og kunne forklare hver en. Denne test sorterer mellem mennesker, der virkelig løste problemet, og mennesker, der videregav eller blev vejledt hele vejen."
+   },
+   {
+    "k": "Taktik",
+    "t": "Vurder karakter gennem kollegaer og venner, ikke gennem CV",
+    "text": "Mennesker kan have på en maske under en samtale; deres venner og kollegaer kan ikke. Kig på hvilke mennesker de har omgivet sig med over tid. En person med integritet er omgivet af mennesker med integritet. En person, der vil snyde, omgives af mennesker, der accepterer det. Elon siger endda, at hvis dårlige mennesker hader dig, gør du måske noget rigtigt – det betyder ikke, at du skal ansætte dem, men det fortæller dig om deres værdier. “Du kan bedømme en persons karakter på deres venner og kollegaer.”"
+   },
+   {
+    "k": "Taktik",
+    "t": "Dårlig holdning kræver hjerne-transplantation; ansæt for holdning, ikke færdighed",
+    "text": "Færdigheder kan underviseres; holdning ikke. En person med virkelig dårlig holdning – dovne, passiv, blamefuld – vil ikke ændres, bare fordi du giver dem KursuserAnderen holdning betyder drivkraft, ærlighed, vilje til at høre feedback og evne til at forbedre. Derfor søger Elon efter mennesker med rigtig holdning, der kan lære teknologi. En god ingeniør uden holdning er værre end en mindre teknisk ingeniør med retten holdning. “Hvis du ikke kan lære dem at være hurtig eller smart, kan du i det mindste lære dem Python. Hvis de har dårlig holdning, intet hjælper.”"
+   },
+   {
+    "k": "Taktik",
+    "t": "Mætning kapacitet: sæt det bedste talent til meget arbejde meget hurtigt",
+    "text": "Unge, ubevist ingeniører uden dårlige vaner fra langsom industri er venner. I stedet for at ansætte 20 middelmådige mennesker, ansæt 5 extraordinært dygtige mennesker og push dem enormt hårdt. Giv dem chokerende ansvar og hastighed. De lærer hurtigt, itererer hurtigt, og de er ikke begrænsede af „det plejer vi at gøre sådan”. Mæt deres kapacitet – få dem til at dage på grænserne for hvad de kan gøre. Det acceleration af læring og frigivelse af talent er hvad vindende hold gør. “Hvor de smarteste, mest drevne mennesker vælger at arbejde, det selskab skal vinde.”"
+   }
+  ]
+ },
+ {
+  "t": "Dræb siloer: design + ingeniør + produktion sammen, én hjerne",
+  "essence": "Organisationens fejl viser sig i produktet. Sæt teamene fysisk sammen; lad ingeniør- og pengebeslutninger ske i samme hoved.",
+  "forklaring": "Når designer, ingeniør og produktionschef arbejder i hver sin verdensdel, bliver produktet en samling kompromiser – ikke en samlet vision. Elon flytter Raptor-motorens ingeniører ud på produktionslinjen, sådan de ser øjeblikkeligt hvad deres tegninger betyder. Fejl i organisationen *vises* som fejl i produktet: en batterikasse får en lågdel selv om chassiset sidder direkte over den (box-in-box), fordi batteriholdet og karosserieholdet ikke talte med hinanden. Korteste vej til sandhed kræver én hjerne på stedet.",
+  "items": [
+   {
+    "k": "Historie",
+    "t": "Raptor-motoren flyttes på produktionslinjen",
+    "text": "Da SpaceX skulle rampe op på Raptor-motorproduktion, var designerne og producentsfolket geografisk adskilt. Elon bringer designernes desks direkte ud på linjen, hvor raketten bliver bygget. Nu ser de i realtid, hvad deres millimeter-beslutninger betyder for præcision, montage, skrappetid. Feedback-båndsbredden mellem atomer-bevægende og tegning-lavende vokser støt – og fejl korrigeres i minutter, ikke måneder."
+   },
+   {
+    "k": "Historie",
+    "t": "Batterikassens redundante låg: box-in-box problemet",
+    "text": "Tesla-batteriet havde en låg, selvom chassiset lagde sig direkte over det. Hver afdeling havde optimeret sit område: batteritoldet designede en »komplet« batterikasse *med* låg (fornuftigt isoleret set), karosseritoldet designede chassiset derover. Resultatet: dobbelt materiale, vægt, kompleksitet. Først når teamene sidder ved samme bord og hører hinanden råbe »WHY DID YOU MAKE IT THIS WAY!?« bliver det fjernet."
+   },
+   {
+    "k": "Eksempel",
+    "t": "Lydisolering vs. brandvern – hvem skal vinde?",
+    "text": "Batteripakken havde en lyd-dæmper-lag. Lydsektionen trodde det var for lydisolering; brandsektionen trodde det var brandvern. Ingen blev enig. Elon siger: »sæt en mikrofon i bilen og test.« Seks timer senere: målt ingen forskel. Komponenten slettes. Denne halve time sparer producenten timilioner – én hjerne på stedet ville have taget beslutningen øjeblikkeligt."
+   },
+   {
+    "k": "Taktik",
+    "t": "Fysisk ko-lokation af brain og hands",
+    "text": "Ingeniøren skal sidde ved siden af producenten, og pengebeslutningerne skal træffes *i samme hoved*. Skip-level møder og direkte kommunikation uden »chain of command« fjerner lag. Som Elon siger: »you cannot separate design, engineering and manufacturing« – og det betyder bogstaveligt fysisk nærhed. Ingeniøren må mærke det på kroppen hvad hans tegning *virkeligt* koster at lave."
+   },
+   {
+    "k": "Taktik",
+    "t": "Slet managere der håndhæver siloer",
+    "text": "Hvis en mellemchef tvinger teams til formelle »rapporterings-kanaler« og hindrer ingeniøren i at råbe »det her virker ikke« direkte til designeren, er chefens job at skabes. Elon fyrer managere der slår kommunikationsvejene i stykker. Mantraet: »shortest-path communication.« En smart ingeniør uden mellemmandsfilter slår ti dårlige ingeniører med tre lag bureaukrati."
+   }
+  ]
+ },
+ {
+  "t": "Vertikal integration som hastighedsvåben",
+  "essence": "Læner du dig på den gamle forsyningskæde, arver du dens fart, pris og teknologi. Byg selv når leverandørerne ikke kan følge med.",
+  "forklaring": "SpaceX lavede sit eget drivværk, sin egen elektronik, sit eget råmateriale – ikke fordi det er »cooler«, men fordi luftfarts-leverandørkæden er langsom, dyr og låst til gamle ønskker. Turbineblade – verden har kun tre støbegods-virksomheder, alle massivt bagloggede. Elon byggede dem selv. Batteripakker, lithium, nikkel-raffineringer: gjort internt. Outcome-baserede kontrakter i stedet for cost-plus betyder han tjener ikke på at bruge 10 år på at udvikle en del. Han tjener på at slutteligt lykkes. Det driver vertikalt integration som *eneste vej til fart*.",
+  "items": [
+   {
+    "k": "Historie",
+    "t": "Turbineblade: tre gamle virksomheder, massivt backlog",
+    "text": "For at få strøm til xAI's Colossus datacenter skal Elon bygge gigawatt-skala kraftanlæg. Gasturbiner kræver specialstøbte blade (vanes og blades). Verden har kun *tre* virksomheder der kan det. De er backloggede til 2030. Elon kan ikke vente. Løsningen: »SpaceX og Tesla må bygge turbinebladene internt.« Samme historie som med Al-støbninger til Starship-karosseri – hvis verden kun har fem støbemaskiner og de siger nej, bygger man selv."
+   },
+   {
+    "k": "Historie",
+    "t": "SpaceX køber ikke raketter: laver sit eget drivværk",
+    "text": "Tidligere bad luftfartsfolk om at købe raketdele fra ULA, Lockheed, Boeing – som var cost-plus kontrakterede (stærkere hver euro brugt). Elon tænker: »vi skal bygge hele systemet.« Robotics, elektronik, drivværk, aluminium-støbninger, landings-bensled – selvgjort. Resultatet: SpaceX når produktionsmængde som »aldrig før i aerospace« – 10-60 gange flere launches end konkurrenter kunne drømme om. Vertikalt integration *er* hastighedsvåbenet."
+   },
+   {
+    "k": "Eksempel",
+    "t": "Støbning af hele Starship-karosseri vs. sammensætning",
+    "text": "Istedet for at samle Starship fra præfabrikerede dele (som klassisk aerospace), ønsker Elon at støbe hele front-tredjedele og bag-tredjedele i én massiv casting. Verdens eneste fem casting-maskinbyer siger nej. Han tager til fabrikanter, finder én der siger »måske« – og der bliver »ja«. Resultat: enorm simplificering af monteringskompleksitet. Eller… hvis det er virkelig nødvendigt, bygger SpaceX selv støbekomplekset."
+   },
+   {
+    "k": "Taktik",
+    "t": "Outcome-baserede kontrakter i stedet for cost-plus",
+    "text": "Aeronautik-industri levede af government cost-plus kontrakter: »du får en procentdel af hvad du bruger.« Incentiv-struktur: *brug flere penge*. Elon gik til NASA og sagde: »jeg vil have outcome-baseret kontrakt – jeg tjener kun hvis det lykkes *billigt* og *til tiden*.« Det er ægte hud i spillet. Måden at leve med det incitament på er: egen produktion, ingen mellemled-profitter, obsessiv omkostningskontrol fra dag ét. Som Elon siger: »{ you inherit the legacy constraints — speed, cost, technology }«."
+   },
+   {
+    "k": "Taktik",
+    "t": "Garantering af fabrikant-output: bind producenten til dig",
+    "text": "Når TSMC eller Samsung ikke kan levere chipkapacitet fast nok, går Elon ikke bare i kø. Han siger: »jeg garanterer at købe dit fulde output.« Det giver producenten sikkerhed til at investere. For lithium og nikkel-raffineringer: SpaceX og Tesla bygger selv. For batterier: Tesla laver dem. Hver led i værdikæden der kunne være en *flaskehals* bliver bragt internt. Som han pointerer: »spending 10–100x more designing the manufacturing system than the Raptor engine« – det er hvor værditilvæksten ligger."
+   }
+  ]
+ },
+ {
+  "t": "Kør alt parallelt; sæt deadlines du kun rammer 50% af tiden",
+  "essence": "Løse deadlines udvider sig til uendeligt. Komprimér tidslinjen strukturelt og kør afhængigheder samtidigt.",
+  "forklaring": "Parkinsons lov siger, at arbejde udvider sig til at fylde den tid, som er tildelt det. Elon sætter deadlines, som kun kan nås med 50 % sandsynlighed, for at tvinge maksimal hastighed og parallelisering. Hvis du altid rammer dine deadlines, er de for løse. PayPal lancerede kreditudvekslings- og bankintegrationerne parallelt, hvilket tog et år i stedet for tre. xAI Colossus blev bygget på 122 dage ved at løbe 24/7-skift, hvor bygning, strøm og netværk blev paralleliseret.",
+  "items": [
+   {
+    "k": "Historie",
+    "t": "PayPals federated payment-system (1999–2000)",
+    "text": "Elon sætter lancering til Thanksgiving-weekend og beordrer teamet til arbejde 24 timer uden stop. PayPal skulle integrere med Federal Reserve, kreditkortbetalinger og bedrageridatabase — alle samtidigt. Ortodoksi siger 3 år; de byggede det på cirka 1 år. Hver komponent blev kørt parallelt, ikke sekventielt."
+   },
+   {
+    "k": "Historie",
+    "t": "Model 3 produktion — 7000 dele samtidigt",
+    "text": "Tesla antog, at alle 7000 unikke reservedele ville ankomme til tiden for lancering. Elon køb fra leverandører før design var færdig, pressede på parallelt. Ideen: lav tidslinjen så aggressiv, at den tvinger hele forsyningskæden til at løbe parallelt i stedet for sekventielt at vente på hver del."
+   },
+   {
+    "k": "Historie",
+    "t": "xAI Colossus — 122 dage fra jord til GPU",
+    "text": "Leverandører sagde 18–24 måneder. Elon dekomponerede byggeri, strøm, køling og netværk som uafhængige projektstrømme. 24/7-skift på hver. Resultatet: Colossus var operationel i 122 dage. Tidskomprimeringen tvang parallelisering på hver eneste niveau."
+   },
+   {
+    "k": "Eksempel",
+    "t": "AI5 og AI6-chips overlappende udvikling",
+    "text": "I stedet for at vente på AI5 at være fuldt optimeret, starter Tesla AI6-designet parallelt. Hver chip-generation overlapper den forrige under udvikling. Risikoen for fejl øges, men hastigheden fordobles."
+   },
+   {
+    "k": "Taktik",
+    "t": "Vælg den mest aggressive deadline med 50 % succes",
+    "text": "Elon siger: »Mit mål er at vælge en deadline som jeg kun har 50 % sandsynlighed for at nå — du mister nogle, men du vinder andre, og du bevæger dig hurtigere end konkurrenterne, som altid rammer deres deadlines.« Det vigtige er ikke at ramme hver deadline, men at køre ved maksimal kapacitet."
+   },
+   {
+    "k": "Taktik",
+    "t": "Ikke at vacillere — beslut og kør fuld fart",
+    "text": "»Det er bedre at vælge en vej og blive ved med at bevæge sig, end at vacillere,« siger Elon. Når deadline er sat og parallelisering starter, accepter risikoen for fejl. Hastighedsgevinsten ved parallelisering opvejer omkostningerne ved at skulle korrigere undervejs — »we'll fix it in flight\"."
+   }
+  ]
+ },
+ {
+  "t": "Omfavn fejl; iterér billigt og hurtigt",
+  "essence": "Design organisationen til at fejle billigt og hurtigt. Fejl er irrelevant med mindre den er katastrofal.",
+  "forklaring": "Elon bygger systemer, som fejler på småt omfang før de når produktion. Han siger: »Jeg vil fejle 500 gange på hver designbeslutning — det betyder at vi kender den mest elegante version, når vi skalerer 10.000 enheder.« SpaceX blæste motorer op på testbænken uden at fyre ingeniørerne. Fejl uden for økonomisk eller sikkerhedskatastrof bliver læring — ikke straf.",
+  "items": [
+   {
+    "k": "Historie",
+    "t": "SpaceX Raptor-motorer — hyppige sprængninger på testbænken",
+    "text": "I udviklingen af Raptor pusher Elon motorerne til grænserne — de eksploderer, sprænger test-faciliteter, og kosten er enorm. Men hver eksplosion lærer hvad der skal ændres. Filosofien: »Hvis vi ikke blæser motorer op på test-standen engang imellem, prøver vi ikke hårdt nok.«"
+   },
+   {
+    "k": "Historie",
+    "t": "Starship-stål-valgmulighederne — tynder til 4 mm",
+    "text": "Designingeniørerne foreslog en svejsetykelse. Elon taler til arbejderne på svejselinje, som siger »måske 4,5 millimeter bliver skrustød.« Han siger: »Lad os prøve 4 millimeter.« Det virker. Fejlen (eller 'eksperimentet') resulterer i en lettere, billigere raket. Test-fejl som disse bliver designdecisioner."
+   },
+   {
+    "k": "Historie",
+    "t": "Tesla-batteri-låget — falsk krav fra to hold",
+    "text": "Batteripakken havde et lag, hvor ét hold mente det var til lyddemping, det andet til brandforvaring. Ingen var sikker. Elon siger: »Sæt en mikrofon i kabinen og test det.« Seks timer senere: ingen forskel. Dele slettes. Test-fejlen blev til cost-saving."
+   },
+   {
+    "k": "Eksempel",
+    "t": "Starlink-gendesign — to størrelsesordener hurtigere",
+    "text": "Starlink var 10 gange dyrere end target og producerede en tiendedel af hvad der behøves. Elon graber Marc Giancosa, en rocket-videnskabsmand fra SpaceX, og sit tro team til Seattle. De skyder hele Starlink-ledelsen og kører algoritmen fra bunden af: slet, spørg krav, simplificér. Over få måneder: to størrelsesordener forbedring. Fejl blev til læring i krigsrum."
+   },
+   {
+    "k": "Taktik",
+    "t": "»Hvis du ikke kan fortælle mig fire måder du fejlede på, gjorde du ikke det rigtige arbejde«",
+    "text": "Elon søger efter ingeniører, som har fejlet og lært. Hvis du siger »jeg har aldrig fejlet«, betyder det, at du aldrig har presset grænserne. Kompensation skal belønne modige træk — at tage beregnet risiko, ikke at undgå fejl. »Bedre at være optimist.«"
+   },
+   {
+    "k": "Taktik",
+    "t": "Fejl kun irrelevante med mindre katastrofale",
+    "text": "»Fejl er helt irrelevante med mindre de er katastrofale,« siger Elon. Byg små til stor — »lav en lille fab først, begå fejlene i lille skala, så en stor fab.« Hvis du tester Raptor-motorer til sprængning på testbænken, ikke i orbit, har du lært for millioner af dollars, ikke milliarder. Systemet skal begrænse fejlomkostningerne, ikke eliminere fejl."
+   }
+  ]
+ },
+ {
+  "t": "Enkelhed er både pålidelighed og lav pris",
+  "essence": "Den bedste del er ingen del. Færre dele, trin og linjer = mere pålidelighed og lavere pris.",
+  "forklaring": "Kompleksitet er ved roden af fejl og omkostninger. Ved at slette deler, processer og linjer af kode opnår man både højere kvalitet og lavere produktionsomkostninger. Hvert ekstra led i produktionen eller samlingen introducerer fejlmuligheder. En del, der ikke eksisterer, kan ikke gå i stykker. Donc: maksimal enkelhed betyder maksimal økonomisk effektivitet og maksimal teknisk robusthed.",
+  "items": [
+   {
+    "k": "Historie",
+    "t": "Tesla Body Casting-revolution",
+    "text": "Elon så en legetøjsbil og spurgte: “Hvordan bliver disse fremstillet så billigt og pålideligt?” Svaret var støbning i én enhed. Han realiserede, at en helt enhed kunne støbes i stedet for at skulle monteres af hundredvis af dele. Når han skiftede Tesla Model 3s bagkrop til støbning, eliminerede det 300 robotter og reducerede kropsværkstedet med 30 procent. Fronten skulle også gøres – men fem store støbemaskinfabrikanter sagde nej, og én sagde “måske”. Han tog “måske” som ja og byggede maskinen selv."
+   },
+   {
+    "k": "Historie",
+    "t": "Raptor-motoren: fra kompleks til elegant",
+    "text": "SpaceX-ingeniørerne designede Raptor-motorens første version som et væld af kabler, forbindelser og dele. Over tid blev designet forenklet år efter år – færre deler, færre forbindelser, færre fejlkilder. Hver iteration blev stærkere og billigere fordi kompleksiteten blev fjernet. Det klassiske “meme” viser tre versioner: den første er uigennemtrængeligt kompleks, den sidste er næsten minimalistisk. Samme motor, men med 70 procent færre dele."
+   },
+   {
+    "k": "Eksempel",
+    "t": "Lyd- eller brand-isolering? Slet delen",
+    "text": "Tesla-batteripakken havde et lag på toppen som kunne være til lydisolering eller brandbekæmpelse – men ingen var sikre. En team testede det ved at sætte en mikrofon i kupéen med og uden laget. Der var ingen forskel. Delen blev slettet straks. Det var værd millioner af dollars i øget produktionskapacitet."
+   },
+   {
+    "k": "Taktik",
+    "t": "Én mand per requirement, én måling mod virkelighed",
+    "text": "Elon tvinger sit hold til at skrive enhver krav med en enkelt persons navn på det – så kan man spørge: “Hvorfor eksisterer dette?” Hvis ingen kan forsvare det, slettes det. Dernæst måles alt mod virkelighed (en mikrofon i kupéen), ikke mod hjemmesidde engineering. Som han siger: « Physics doesn't care about your feelings » – kun virkelighed afgør."
+   },
+   {
+    "k": "Taktik",
+    "t": "Stål over carbon fiber: billigt modslår avanceret",
+    "text": "Raketter blev traditionelt lavet af kulfiber – dyrt, svært at håndtere, kræver autoklave. Elon indså, at stål bliver stærkere ved kolde temperaturer (hvor raketter er). Derfor skiftede SpaceX til stål, som man kan svejse i et telt (med cigar i munden). 50 gange billigere og lettere at skalere. « You can weld stainless steel in a tent » – ikke lyset af avancering, men simplitetens styrke."
+   },
+   {
+    "k": "Taktik",
+    "t": "Arbejdsflydekombination: færre handoff, færre fejl",
+    "text": "I den traditionelle rumfart sendes tegninger fra design til én underleverandør, der sender til en anden, der sender til en tredje – fem virksomheder før nogen rører metallet. Hver lag tilføjer kompleksitet, fortolkning og omkostning. SpaceX gjorde ingeniørerne, designerne og produktionsmændene til et hold der sidder ved samme produktionslinje. « The best process is no process » betyder: slet mellemmændene og lag direkte feedback."
+   },
+   {
+    "k": "Taktik",
+    "t": "One point for adding a line, two for deleting one",
+    "text": "Elons principper for kodereview: tilføjelse af én linje kode er én point, men slettelse af én linje er to points. Det signalerer hvad der værdisættes – ikke påfyldning, men ægte forenkling. Algoritmens første trin er « Delete, delete, delete » fordi mere først skal væk før der skal tilføjes noget nyt."
+   }
+  ]
+ },
+ {
+  "t": "Brug penge til at købe tid; gør lave omkostninger til forretningsmodellen",
+  "essence": "Mål omkostninger i dage, ikke kun kroner. Brug den kapitalform der fjerner fart-begrænsningen.",
+  "forklaring": "Tid er den værdifuldeste ressource – hver dag uden fremskridt koster millioner i tabt mulighed. Langsomhed er uacceptabelt, ikke bare ubehagelig. Investering skal defineres efter hvor mange dage det spar – ikke blot hvor mange kroner det koster. Outcome-baserede kontrakter belønner hurtighed og omkostningseffektivitet, ikke budgetforbrug. Når kapital er begrænsningen for hastighed, skal man bruge meget kapital; når kapital ikke begrænser, skal man optimere for andet.",
+  "items": [
+   {
+    "k": "Historie",
+    "t": "100 millioner dollars i dag i stedet for ti år af langsom udvikling",
+    "text": "Elon ville op til Mars. Han kunne enten bruge den traditionelle NASA-tilgang (tidsløshed garanteret) eller bruge sit eget kapital som brændstoffer. Han tog 100 millioner dollars i tidlige investerings-millioner, hvilken han kunne have holdt, og satte alt på det ene slag for at få SpaceX startet. Hele tidslinjen blev presset sammen fordi penge blev brugt til at købe dage – hyring af første-klass talenter, tilladelse til at lave fejl hurtigt og lære, og overlegen iteration hastighed versus konkurrenter med lange budgetcyklusser."
+   },
+   {
+    "k": "Historie",
+    "t": "Outcome-baserede kontrakter versus cost-plus: NASA-ændring",
+    "text": "Før SpaceX blev alle rumfarts-kontrakter “cost-plus” – udbyderen blev betalt for hvad den brugte, plus en procent. Incitamentet var at *maksimere* udgifterne. Elon gik til regeringen og sagde: “Lad mig få outcome-baserede kontrakter hvor jeg bliver betalt for at få en raket til kredsløb, ikke for hvor meget jeg bruger.” Det vendte hele økonomien rundt. Pludselig blev det rentabelt at være billig og hurtig. Samme NASA-ingeniører, samme fysik, men incitamenterne gjorde spektakulært stor forskel."
+   },
+   {
+    "k": "Eksempel",
+    "t": "Starlink-krisen: to størrelsesordener fejl, fireogtyve timer løsning",
+    "text": "Starlink var 10x for dyr og producerede 1/10 af det nødvendige. To størrelsesordener off. Elon sagde: “Dette er nu begrænsningen. Vi er i krig.” Han tog sin bedste raket-ingeniør (Marc Giancosa) og et hold, de fløj til Seattle, fyr hele Starlink-ledelsen, og sad i en krigsrum og kørte algoritmen (spørg krav, slet, forenkle). På få måneder: to størrelsesordener spring. Hvorfor? Fordi han var villig til at bruge penge (hyring af sine bedste mennesker) til at købe dage."
+   },
+   {
+    "k": "Taktik",
+    "t": "Fyr robotter, øg kapaciteten: penge for tid",
+    "text": "Under Tesla Model 3 “Production Hell” fandt Elon ud af, at 300+ robotter gjorde arbejdet ineffektivt. Hans løsning: FYRE ROBOTTERNE og kassér det investerede kapital (millioner af dollars i udstyret). Folk gik tilbage til manuel arbejde eller enklere robotik, og produktionen ACCELEREREDE. Traditionel tænkning siger « vi har investeret i disse robotter, vi kan ikke kassere dem », men Elon måler tiden som mere værdifuld: « it is not okay to scrap time, but it's okay to scrap money »."
+   },
+   {
+    "k": "Taktik",
+    "t": "Lån fra offentlige markeder, ikke private kapital, når tempo kræver det",
+    "text": "Elon bemærkede at offentlige markeder har 10-100 gange mere kapital end private markeder. Hvis hastighed er begrænsningen og kapital kan fjerne den, så er offentlige markeder løsningen – selv om det betyder længere offentlig granskning. SpaceX overvejer nu børsnoteringen for at få adgang til denne kapitalform. « Whatever the limiting factor is on speed, I'm going to tackle that. If capital is the limiting factor, I'll raise capital »."
+   },
+   {
+    "k": "Taktik",
+    "t": "Prøveperiode på lønninger: betaling for hastighed, ikke budget",
+    "text": "SpaceX og Tesla bruger outcome-baserede økonomi internt: hvis du løser problemet hurtigere, får du bonusser og befordring; hvis du bruger budgettet uden resultat, går du ud. Dette tvinger hele organisationen til at tænke i “dage sparede” ikke “kroner brugt”. En ingeniør der reducerer produktionscyclus med en dag får mere anerkendelse end en der gemmer en million uden at påvirke hastighed."
+   }
+  ]
+ },
+ {
+  "t": "Udvid 'produktet' til hele kunderejsen",
+  "essence": "Lav ikke bare produktet — lav hele oplevelsen. Forvandl smertepunkter til indtægt og fjern mellemled.",
+  "forklaring": "En bil er ikke bare mekanik; det er oplevelsen fra test-drive til service. Tesla Insurance blev født fordi Elon så, at bilejerne havde smertepunkter uden for fabrikken. Service-vans med espressomaskiner, mobile triage hvor 80 % af reparationer klares i 20 minutter — det er produktudvikling. Når du ejer hele kunderejsen, eliminerer du middelmændene og den komplekse værdikedja, der normalt øger omkostninger.",
+  "items": [
+   {
+    "k": "Historie",
+    "t": "Tesla Insurance fra sensor-data",
+    "text": "Elon observerede, at forsikringsselskaber var fulde af mellemled og ineffektivitet. Ved at bruge Tesla-bilens sensorer og kørselsdata kunne Tesla tilbyde dyrere og mere præcis forsikring. Resultatet blev en $1.500/år produkt, der angreb en industri fyldt med slørende omkostninger. Ved at eie hele erfaringen — bilen selv, dataene og forsikringen — øgedes værdien eksponentielt."
+   },
+   {
+    "k": "Historie",
+    "t": "Produktkonfigurationer: fra kompleksitet til klarhed",
+    "text": "Tesla reducerede deres bilkonfigurationer fra 300.000 muligheder til to pakker. Ikke ved at fjerne kvalitet, men ved at eliminere falske valg. Salgsprosessen blev 64 klik nedsat til 12. Resultatet: 20 % stigning i salgskonvertering. Når kunderejsen er intuitiv, skabes der umiddelbar værdi."
+   },
+   {
+    "k": "Eksempel",
+    "t": "Starship: fuld genbrugselighed",
+    "text": "Traditionel rumfartsteknologi behandler raketter som engangs-anvendelser — 40.000 inspektioner efter hver flyvning. SpaceX genoptænkte hele produktet: påfyld brændstof, flyv igen. Full reusability ændrede økonomien af rummulighed fra trange omkostninger til skalabilitet."
+   },
+   {
+    "k": "Taktik",
+    "t": "Spørg: hvad skal fjernes fra kunderejsen?",
+    "text": "Identificer hver smertepunkt i kundens oplevelse — ikke blot med produktet, men rundt omkring det. Service? Betaling? Onboarding? « Never make service a profit center »; gør det til en omkostning der reduceres gennem innovation. Når smertepunkter fjernes, stiger loyalitet."
+   },
+   {
+    "k": "Taktik",
+    "t": "Gør dig selv til kunden",
+    "text": "Jonathan McNeill tog otte forskellige test-drives hos Tesla som anonyme kunder og modtog nul opfølginger. Han opdagede, at salesfolk havde incitament til leads, ikke til salg. Det medførte, at 5.000 potentielle kunder vendte tilbage — og « go straight to the consumer, own everything » blev den nye strategi."
+   },
+   {
+    "k": "Taktik",
+    "t": "Integrer hele værdikæden",
+    "text": "Vertikalisering betyder at styre råmaterialer, produktion, distribution og after-sales. Det koster mere strukturelt på kort sigt, men fjerner margin-tyveri på hver trin. SpaceX producerer sine egne dele; Tesla styrer service. « You have to see the flaw in the organization in the product » — når der er for mange grænser, opstår ineffektivitet."
+   }
+  ]
+ },
+ {
+  "t": "Ugentlig kadence, én nøglemetrik, radikal ansvarlighed",
+  "essence": "Én nøglemetrik pr. team på første slide. Ugentlige skip-level reviews uden forberedelse afslører sandheden.",
+  "forklaring": "Operationelle tempoer bestemmer vinder. Elon insisterer på ugentlige (eller dobbelt-ugentlige) reviews hvor topledelsen mødes uden PowerPoint eller forberedelser. « Video games without a score are boring » — metrics driver adfærd. Én nøglemetrik pr. team gør prioriteringer klar. Skip-level reviews uden forvarsel afsløre hvad der virkeligt foregår, ikke hvad ledere ønsker at rapportere.",
+  "items": [
+   {
+    "k": "Historie",
+    "t": "AI5 chip: tysdags- og lørdagsoversigt",
+    "text": "Tesla AI5-chipdesign køres gennem ugentlige reviews hver tirsdag og lørdag uden agenda. Elon møder op, spørger direkte: « Hvor er vi på konvergensen? » Alle datapoint plottes på en kurve. Ingen glatte præsentationer, bare fakta. Denne kadence komprimerer udviklingscyklus fra måneder til uger."
+   },
+   {
+    "k": "Historie",
+    "t": "Startlink: « miles driven without interventions »",
+    "text": "SpaceX definerede succes som én enkelt metrik: hvor langt kan et køretøj køre uden menneskelig indgriben? Alle andre målinger blev sekundære. Denne simplicitet af fokus tillod hele organisationen at bevæge sig i samme retning uden organisatorisk friktion."
+   },
+   {
+    "k": "Eksempel",
+    "t": "Tolv mennesker, ikke fire hundrede i møder",
+    "text": "I stedet for at have store møder med mange mennesker mødes tolv mennesker hver anden uge, de med faktisk ansvar. Hver bringer sin nøglemetrik. Mødet varer to timer. Ingen « glazed over » blikke fordi der ikke er tid til PowerPoint-slummer. « Otherwise you get glazed » er Elons kommentar til langsvindige forberedelser."
+   },
+   {
+    "k": "Taktik",
+    "t": "En metrik pr. team på første slide",
+    "text": "Skriv « electrodes installed per minute into a brain » eller « % of cars reaching 100k miles without service » på slide et. Det er det eneste som betyder noget. Alt andet er taktik under det mål. Når alle ved hvad der tælles, bliver selvorganisering mulig."
+   },
+   {
+    "k": "Taktik",
+    "t": "Udsend alle reviews uden dagorden",
+    "text": "Møderne skal være uforudsigelige for at afsløre sandheden. Hvis mennesker ved hvad der kommer, forbereder de svar. « No advance preparation » betyder at du hører hvad der virkeligt skete, ikke hvad man ønsker du skal høre. Hvis det er ubehageligt for lederen, er systemet sandsynligvis kaputt."
+   },
+   {
+    "k": "Taktik",
+    "t": "Plotting progress points på kurven",
+    "text": "Tegn progres hver gang mødet holdes. Hvis kurven ikke konvergerer mod mållinjen, må strategien ændres samme dag. « Does it drive the metric? » bliver den eneste spørgsmål som betyder noget. Alt som ikke driver metrikken bliver slettet eller reprioriteret."
+   }
+  ]
+ },
+ {
+  "t": "Led forfra; mission tiltrækker bygherrer; kommunikér knivskarpt",
+  "essence": "Lev missionen synligt, og brænd dit eget før du beder andre. Klar kommunikation holder farten.",
+  "forklaring": "Ledere der forventer heroiske indsatser fra deres folk uden at yde tilsvarende offer, mister troværdighed. Elon sov på fabrikkens gulv i tre år så teamet kunne se hans smerte. Han investerede $200 millioner af sin egen formue før han spurgte andre. « A strong sense of purpose attracts the best talent in the world » — mennesker vil ikke bygge sjælløse produkter. De vil være på evnen til at løse umuligheder sammen med nogen der lever det.",
+  "items": [
+   {
+    "k": "Historie",
+    "t": "Sovende på Fremont/Nevada gulvene",
+    "text": "I tre år — 2015–2018 — sov Elon Musk på fabriksgulve ved Fremont Tesla fabrik og Nevada Gigafactory. Ikke i en chefsuite. Ikke i et hotel. Gulvet. Teamet så hver dag at « whatever pain they experienced, I had more ». Dette etablerede et uudsigeligt bånd. Mennesker giver ikke op når deres leder er der i mudret med dem."
+   },
+   {
+    "k": "Historie",
+    "t": "En mand satte $200 millioner ned før andre",
+    "text": "Før Tesla og SpaceX blev finansierede af andre investorer, satte Elon sit eget formue på linjen. Ikke som « venture capital »; som survival. Boede i Jeff Skoll's spare bedroom i 2008 fordi alle hans penge var i SpaceX. Når folk ser at en leder brænder sit eget før han beder andre at brænde deres, accepterer de større risiko fordi de ved at lederen ikke vinder uden dem."
+   },
+   {
+    "k": "Eksempel",
+    "t": "SpaceX Raptor engine: « standing in the launch control room »",
+    "text": "Under de kritiske Starship-tests står Elon selv i launch-kontrolrummet og tager go/no-go-beslutninger. Han er ikke bag en skærm. Hvis raketten eksploderer, er hans beslutning på spillet. Dette skaber nervøs energi som filtrerer gennem hele organisationen."
+   },
+   {
+    "k": "Taktik",
+    "t": "Kommunikér missionen, ikke strategi",
+    "text": "« We're making life multiplanetary » eller « Accelerating sustainable energy ». Ikke « We're building electric cars that compete with Porsche ». Mission tiltrækker mennesker som ønsker at være del af noget større end themselves. Strategi er hvordan. Mission er hvorfor. Mennesker arbejder for hvorfor."
+   },
+   {
+    "k": "Taktik",
+    "t": "Banning made-up acronyms og « all bad news loudly and often »",
+    "text": "Elon har forbud mod SpaceX-intern jargon: « unless approved by me, it should not enter the SpaceX glossary ». Når mennesker skal tale klart, kan de ikke gemme sig bag ord. Dette tvinger kommunikation til at blive direkte. « All bad news loudly and often » betyder at problemer får omgående opmærksomhed, ikke camouflaget af bureaukrati."
+   },
+   {
+    "k": "Taktik",
+    "t": "Repetition er persuasiv; byg en prototype",
+    "text": "Elon gentager de samme principper — « the algorithm » — helt til teamet kan forudsige hans næste ord. Mennesker lærer gennem gentakelse, ikke gennem éngangs-foredrag. Han siger også « build a working prototype because anything looks good on PowerPoint ». Ord er billige. Fysiske beviser er ægte. Når folk ser at du betyder det ved at bygge og fejle, følger de."
+   }
+  ]
+ }
+];
+
+const KIND={Historie:'hist',Eksempel:'exmp',Taktik:'takt'};
+const root=document.getElementById('root');
+function tierClass(i){ return i>=10?'t3':(i>=5?'t2':''); }
+
+function renderItems(items, prefix){
+  const ul=document.createElement('ul'); ul.className='items';
+  (items||[]).forEach((it,ii)=>{
+    const li=document.createElement('li'); li.className='item'; li.dataset.id=prefix+'_i'+ii;
+    const cls=KIND[it.k]||'';
+    const row=document.createElement('div'); row.className='irow';
+    row.innerHTML='<div class="icaret">'+CARET+'</div>'+
+      '<div class="itext"><span class="ktag '+cls+'">'+it.k+'</span><span class="ilabel">'+it.t+'</span></div>';
+    row.addEventListener('click',()=>{ li.classList.toggle('open'); saveOpen(); });
+    li.appendChild(row);
+    const body=document.createElement('div'); body.className='ibody';
+    body.innerHTML='<p>'+it.text+'</p>';
+    li.appendChild(body);
+    ul.appendChild(li);
+  });
+  return ul;
+}
+
+DATA.forEach((p,pi)=>{
+  const li=document.createElement('li'); li.className='principle '+tierClass(pi); li.dataset.id='p'+pi;
+  const head=document.createElement('div'); head.className='phead';
+  head.innerHTML='<div class="pnum">'+(pi+1)+'</div><div class="ptitles">'+
+    '<div class="ptitle">'+p.t+'</div><div class="pessence">'+p.essence+'</div>'+
+    '</div><div class="caret">'+CARET+'</div>';
+  head.addEventListener('click',()=>{ li.classList.toggle('open'); saveOpen(); });
+  li.appendChild(head);
+
+  const body=document.createElement('div'); body.className='pbody';
+  body.innerHTML='<div class="section-label">Forklaring</div><div class="forklaring">'+p.forklaring+'</div>';
+
+  if(p.steps && p.steps.length){
+    const sl=document.createElement('div'); sl.className='section-label'; sl.textContent='De fem trin'; body.appendChild(sl);
+    const sul=document.createElement('ul'); sul.className='steps';
+    p.steps.forEach((st,si)=>{
+      const sli=document.createElement('li'); sli.className='step'; sli.dataset.id='p'+pi+'s'+si;
+      const sh=document.createElement('div'); sh.className='shead';
+      sh.innerHTML='<div class="stitle">'+st.t+'</div><div class="scaret">'+CARET+'</div>';
+      sh.addEventListener('click',()=>{ sli.classList.toggle('open'); saveOpen(); });
+      sli.appendChild(sh);
+      const sb=document.createElement('div'); sb.className='sbody';
+      if(st.forklaring) sb.innerHTML='<div class="sforklaring">'+st.forklaring+'</div>';
+      sb.appendChild(renderItems(st.items,'p'+pi+'s'+si));
+      sli.appendChild(sb);
+      sul.appendChild(sli);
+    });
+    body.appendChild(sul);
+  } else {
+    const il=document.createElement('div'); il.className='section-label'; il.textContent='Uddyb — Historie · Eksempel · Taktik'; body.appendChild(il);
+    body.appendChild(renderItems(p.items,'p'+pi));
+  }
+  li.appendChild(body);
+  root.appendChild(li);
+});
+
+const K_OPN='hg_open_v3';
+function saveOpen(){
+  const ids=[...document.querySelectorAll('li.principle.open,li.step.open,li.item.open')].map(c=>c.dataset.id);
+  localStorage.setItem(K_OPN, JSON.stringify(ids));
+}
+function loadOpen(){
+  try{ JSON.parse(localStorage.getItem(K_OPN)||'[]').forEach(id=>{
+    const el=document.querySelector('li[data-id="'+id+'"]'); if(el) el.classList.add('open');
+  }); }catch(e){}
+}
+document.getElementById('expandAll').addEventListener('click',()=>{
+  document.querySelectorAll('li.principle,li.step,li.item').forEach(l=>l.classList.add('open')); saveOpen();
+});
+document.getElementById('collapseAll').addEventListener('click',()=>{
+  document.querySelectorAll('.open').forEach(l=>l.classList.remove('open')); saveOpen();
+});
+loadOpen();
+</script>
+</body>
+</html>
